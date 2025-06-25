@@ -1,88 +1,66 @@
-<div class="px-4 py-5 my-5 text-center">
-    <h1 class="display-5 fw-bold">Submit Your Recipe</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead">Share your amazing recipies with thousands of web developers accross the world. Fill our form to get started.</p>
-    </div>
-  </div>
-  
-  <div class="row justify-content-center">
-  
-    <% if(infoSubmitObj != '') { %>
-      <div class="col-8 alert alert-success" role="alert">
-        <%= infoSubmitObj %>
-      </div>
-    <% } %>
-  
-    <% if(infoErrorsObj != '') { %>
-      <div class="col-8 alert alert-danger" role="alert">
-        <%= infoErrorsObj[0].message %>
-      </div>
-    <% } %>
-  
-    <div class="col-8">
-  
-      <form action="/submit-recipe" enctype="multipart/form-data" method="POST">
-      
-        <div class="row g-3">
-  
-          <div class="col-12">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" autocomplete="off">
-          </div>
-  
-          <div class="col-12">
-            <label for="name" class="form-label">Recipe Name</label>
-            <input type="text" name="name" id="name" class="form-control" required autocomplete="off">
-          </div>
-          
-          <div class="col-12">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="description" id="description" class="form-control" cols="30" rows="4" required autocomplete="off"></textarea>
-          </div>
-  
-          <div class="col-12">
-            <label for="name" class="form-label">Ingredients</label><br>
-            <small>Example: Ice</small>
-            <div class="ingredientList">
-              <div class="ingredientDiv mb-1">
-                <input type="text" name="ingredients" class="form-control" required autocomplete="off">
-              </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Recipe</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Recipe</h1>
+        <form action="/updateRecipe/<%= recipe._id %>" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Recipe Name</label>
+                <input type="text" name="name" id="name" class="form-control" value="<%= recipe.name %>" required>
             </div>
-          </div>
-  
-          <div class="col-12">
-            <button type="button" class="btn btn-outline-primary" id="addIngredientsBtn">+ Ingredient</button>
-          </div>
-          <div class="col-12">
-            <label for="instructions" class="form-label">Instructions</label>
-            <textarea name="instructions" id="instructions" class="form-control" cols="30" rows="4" required></textarea>
-          </div>
-  
-          <div class="col-12">
-            <label for="category">Select Category</label>
-            <select class="form-select form-control" name="category" aria-label="Category" required>
-              <option selected>Select Category</option>
-              <option value="Thai">Thai</option>
-              <option value="American">American</option>
-              <option value="Chineese">Chineese</option>
-              <option value="Mexican">Mexican</option>
-              <option value="Indian">Indian</option>
-              <option value="Indian">Italian</option>
-            </select>
-          </div>
-  
-          <div class="col-12">
-            <label for="image">Product Image</label>
-            <input type="file" class="form-control" name="image" accept="image/*" required>
-          </div>
-  
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary">Edit Recipe</button>
-          </div>
-  
-        </div>
-      
-      </form>
-  
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" class="form-control" rows="4" required>
+                    <%= recipe.description %>
+                </textarea>
+            </div>
+            <div class="form-group">
+                <label for="ingredients">Ingredients</label>
+                <input type="text" name="ingredients" id="ingredients" class="form-control" value="<%= recipe.ingredients.join(',') %>" required>
+            </div>
+            <div class="form-group">
+                <label for="instructions">Instructions</label>
+                <textarea name="instructions" id="instructions" class="form-control" rows="4" required>
+                    <%= recipe.instructions %>
+                </textarea>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select name="category" id="category" class="form-control" required>
+                    <option value="<%= recipe.category %>" selected><%= recipe.category %></option>
+                    <option value="North-Indian">North-Indian</option>
+                    <option value="South-Indian">South-Indian</option>
+                    <option value="Bengali-Dishes">Bengali-Dishes</option>
+                    <option value="Rajasthani-Dishes">Rajasthani-Dishes</option>
+                    <option value="Maharashtrian-Dishes">Maharashtrian-Dishes</option>
+                    <option value="Kashmiri-Dishes">Kashmiri-Dishes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dietType">Diet Type</label>
+                <select name="dietType" id="dietType" class="form-control" required>
+                    <option value="<%= recipe.dietType %>" selected><%= recipe.dietType %></option>
+                    <option value="Healthy Food">Healthy Food</option>
+                    <option value="Junk Food">Junk Food</option>
+                    <option value="Low-Carb">Low-Carb</option>
+                    <option value="High-Protein">High-Protein</option>
+                    <option value="Vegan">Vegan</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Gluten-Free">Gluten-Free</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <img src="/uploads/<%= recipe.image %>" alt="Recipe Image" width="100">
+                <input type="file" name="image" id="image" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
     </div>
-  </div>
+</body>
+</html>

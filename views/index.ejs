@@ -1,17 +1,314 @@
+<!-- Marquee Section with Images and Unique Recipe Categories -->
+<section class="py-3 bg-light text-center">
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <a href="/recipes/category/North-Indian" id="mq">
+                <div class="marquee-item">
+                    <img src="https://png.pngtree.com/png-clipart/20231002/original/pngtree-samosa-halal-food-png-image_13067316.png" alt="North Indian Recipes" class="marquee-image">
+                    <p class="slogan">Bold and Spicy North Indian Recipes</p>
+                </div>
+            </a>
+            <a href="/recipes/category/South-Indian" id="mq">
+                <div class="marquee-item">
+                    <img src="https://png.pngtree.com/png-clipart/20230927/original/pngtree-masala-dosa-with-sambhar-illustration-south-india-favorite-food-png-image_13158361.png">
+                    <p class="slogan">Delicious South Indian Flavors</p>
+                </div>
+            </a>
+            <a href="/recipes/category/Bengali-Dishes" id="mq">
+                <div class="marquee-item">
+                    <img src="https://png.pngtree.com/png-clipart/20240627/original/pngtree-palak-paneer-delight-authentic-indian-cuisine-poster-png-image_15425820.png" alt="Bengali Dishes" class="marquee-image">
+                    <p class="slogan">Taste the Richness of Bengali Cuisine</p>
+                </div>
+            </a>
+            <a href="/recipes/category/Gujarati-Dishes" id="mq">
+                <div class="marquee-item">
+                    <img src="https://png.pngtree.com/png-vector/20241120/ourmid/pngtree-plate-of-homemade-dhokla-cubes-with-seasoning-png-image_14407487.png" alt="Gujarati Dishes" class="marquee-image">
+                    <p class="slogan">Authentic Gujarati Flavors</p>
+                </div>
+            </a>
+            <a href="/recipes/category/Rajasthani-Dishes" id="mq">
+                <div class="marquee-item">
+                    <img src="https://png.pngtree.com/png-vector/20240322/ourmid/pngtree-traditional-rajasthani-cuisine-daal-bati-served-along-with-onion-and-daal-png-image_12180631.png" alt="Rajasthani Dishes" class="marquee-image">
+                    <p class="slogan">Savor the Heritage of Rajasthani Cuisine</p>
+                </div>
+            </a>
+            <a href="/recipes/category/Maharashtrian-Dishes" id="mq">
+                <div class="marquee-item">
+                    <img src="https://static.vecteezy.com/system/resources/previews/035/270/497/non_2x/ai-generated-dal-makhni-food-in-a-bowl-on-transparent-background-ai-generated-free-png.png" alt="Maharashtrian Dishes" class="marquee-image">
+                    <p class="slogan">Flavors of Maharashtra: Spicy & Tangy</p>
+                </div>
+            </a>
+            <a href="/recipes/category/Kashmiri-Dishes" id="mq">
+                <div class="marquee-item">
+                    <img src="https://static.vecteezy.com/system/resources/previews/042/053/676/non_2x/ai-generated-pulao-hand-drawn-cartoon-style-illustration-free-png.png" alt="Kashmiri Dishes" class="marquee-image">
+                    <p class="slogan">Heavenly Taste of Kashmiri Cuisine</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- Marquee Styling -->
+<style>
+    /* .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        background-color: #f1f1f1;
+        padding: 15px 0;
+        border-radius: 5px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    } */
+     #mq{
+        margin-right: 30px;
+     }
+
+    .marquee-content {
+        display: flex;
+        animation: marquee 20s linear infinite; 
+    }
+
+    .marquee-item {
+        text-align: center;
+        margin-right: 30px;
+    }
+
+    .marquee-image {
+        /* max-width: 120px;  */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 80px;
+        width: 90px;
+    }
+
+    /* .marquee-image:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    } */
+
+    .slogan {
+        font-size: 14px;
+        color: #555;
+        margin-top: 5px;
+        font-weight: bold;
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+    img{
+        height: 80px;
+        width: 80px;
+    }
+</style>
+
+
+
+<style>
+    
+      /* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h5 {
+    color: #343a40;
+}
+
+p {
+    color: #6c757d;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn-explore {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-explore:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+}
+
+/* Hero Image */
+.home-img {
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.5s ease-in-out;
+}
+
+.home-img:hover {
+    transform: scale(1.05);
+}
+
+/* Category Cards */
+.category_link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.category_img {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.category_img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+.animate__animated {
+    animation-duration: 1s;
+}
+
+.animate__fadeInLeft {
+    animation-name: fadeInLeft;
+}
+
+.animate__pulse {
+    animation-name: pulse;
+}
+
+
+
+</style>
+<style>
+    /* General Styling */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+    
+    h1, h2, h5 {
+        color: #343a40;
+    }
+    
+    p {
+        color: #6c757d;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    .btn-explore {
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .btn-explore:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+    }
+    
+    /* Hero Image */
+    .home-img {
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+        height: auto;
+    }
+    
+    .home-img:hover {
+        transform: scale(1.05);
+    }
+    
+    /* Category Cards */
+    .category_link {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .category_img {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .category_img img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .category_img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .home-img {
+            margin-bottom: 20px;
+        }
+    
+        .display-5 {
+            font-size: 1.8rem;
+            text-align: center;
+        }
+    
+        p {
+            text-align: center;
+            padding: 0 15px;
+        }
+    
+        .btn-explore {
+            width: 100%;
+            text-align: center;
+        }
+    
+        .category_img {
+            margin-bottom: 20px;
+        }
+    
+        h5 {
+            font-size: 1rem;
+            text-align: center;
+        }
+        .explore-latest{
+            margin-left: 20px;
+        }
+    }
+    </style>
+    
+
+
 <div class="row flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
     <div class="col-12 col-lg-6">
-        <img src="https://mobimg.b-cdn.net/v3/fetch/e5/e594d337200536d04e08e6584a690275.jpeg" alt="Cooking blog"
+        <img src="https://media.assettype.com/quintype-website%2F2022-11%2F63a278b6-5383-4bc6-87ac-bb8a5c881fc9%2Ftraditional_indian_soup_lentils_indian_dhal_spicy_curry_bowl_spices_herbs_rustic_black_wooden_table.jpg?rect=0%2C106%2C1500%2C788&w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100" alt="Cooking blog"
             class="d-block mx-lg-auto img-fluid home-img" loading="lazy">
     </div>
     <div class="col-12 col-lg-6">
-        <h1 class="display-5 fw-bold mb-3">Wide varities of delicious recipe ideas</h1>
+        <h1 class="display-5 fw-bold mb-3">Spice and Slice : Your Guide to Flavorful Cooking</h1>
         <p>
             Expore our huge selection of delicious recipe ideas including easy desserts,vee and non-veg dinner ideas,
             yummy pasta recipes, quick bakes, family friendly meals and gluttten-free recipes
         </p>
         <div class="d-grid d-md-flex justify-content-md-start">
-            <a href="/explore-latest" class="btn btn-primary btn-dark btn-lg px-4 me-md-2">Explore Latest</a>
-            <a href="/explore-random" class="btn btn-outline-secondary btn-light btn-lg px-4 me-md-2">Show Random</a>
+            <a href="/explore-latest" class="btn btn-primary btn-dark btn-lg px-4 me-md-2 ex explore-latest">Explore through Diet Plans</a>
+            <!-- <a href="/explore-random" class="btn btn-outline-secondary btn-light btn-lg px-4 me-md-2">Show Random</a> -->
         </div>
     </div>
 </div>
@@ -37,17 +334,17 @@
             <% }) %>
                 <% } %>
 
-                    <a href="/categories" class="col text-center text-decoration-none">
+                    <!-- <a href="/categories" class="col text-center text-decoration-none">
                         <br>
                         <div class="pt-1">View All</div>
-                    </a>
+                    </a> -->
 </div>
 
 <!-- latest start -->
 <section class="pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
         <h2>Latest Recipes</h2>
-        <a href="/explore-latest" class="ms-auto">View More</a>
+        <!-- <a href="/explore-latest" class="ms-auto">View More</a> -->
     </div>
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
         <% if(food !='' ) { %>
@@ -70,11 +367,11 @@
 </section>
 <!-- latest end -->
 
+<!-- <hr>
 
-<!-- latest start -->
 <section class="pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
-        <h2>Thai Recipes</h2>
+        <h2>North-Indian Recipes</h2>
         <a href="/categories/Thai" class="ms-auto">View More</a>
     </div>
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
@@ -96,12 +393,12 @@
                         <% } %>
     </div>
 </section>
-<!-- latest end -->
 
-<!-- latest start -->
+<hr>
+
 <section class="pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
-        <h2>Indian Recipes</h2>
+        <h2>South-Indian Recipes</h2>
         <a href="/categories/Indian" class="ms-auto">View More</a>
     </div>
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
@@ -123,12 +420,12 @@
                         <% } %>
     </div>
 </section>
-<!-- latest end -->
 
-<!-- latest start -->
+<hr>
+
 <section class="pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
-        <h2>Chineese Recipes</h2>
+        <h2>Bengali-Dishes Recipes</h2>
         <a href="/categories/Chineese" class="ms-auto">View More</a>
     </div>
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
@@ -150,9 +447,9 @@
                         <% } %>
     </div>
 </section>
-<!-- latest end -->
 
-<!-- submit start -->
+<hr>
+
 <section class="px-4 py-5 my-5 text-center">
     <img src="/img/publish-recipe.png" alt="Publish your recipe for free today" class="d-block mx-auto mb-4 img-fluid"
         loading="lazy" width="566" height="208">
@@ -163,5 +460,5 @@
             <a href="/submit-recipe" class="btn btn-primary btn-dark btn-lg">Submit Recipe</a>
         </div>
     </div>
-</section>
+</section> -->
 <!-- submit-end -->

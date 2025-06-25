@@ -112,7 +112,7 @@ exports = module.exports.homepage = async (req, res) => {
 //         console.log("error", error);
 //     }
 // }
-//insertDummyRecipeData()
+// insertDummyRecipeData()
 
 exports = module.exports.exploreCategories = async (req, res) => {
     try {
@@ -161,17 +161,50 @@ exports = module.exports.searchRecipe = async (req, res) => {
     }
 }
 
+// exports = module.exports.exploreLatest = async (req, res) => {
+//     try {
+//         const limitNumber = 20
+//         const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber)
+
+//         res.render('explore-latest', { title: 'Cooking Blog - Explore Latest', recipe })
+//     }
+//     catch (err) {
+//         res.status(500).send({ message: err.message || "Error Occured" })
+//     }
+// }
+
+const dietTypeOrder = [
+    'Healthy Food',
+    'Junk Food',
+    'Low-Carb',
+    'High-Protein',
+    'Vegan',
+    'Vegetarian',
+    'Gluten-Free',
+    'Non-Vegetarian'
+];
+
 exports = module.exports.exploreLatest = async (req, res) => {
     try {
-        const limitNumber = 20
-        const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber)
+        const recipes = await Recipe.aggregate([
+            { 
+                $group: {
+                    _id: "$dietType",  // Group by dietType
+                    recipes: { $push: "$$ROOT" }  // Push all the recipe details under the corresponding dietType
+                }
+            },
+            { 
+                $sort: { _id: 1 }  // Sort diet types alphabetically (optional)
+            }
+        ]);
 
-        res.render('explore-latest', { title: 'Cooking Blog - Explore Latest', recipe })
+        res.render('explore-latest', { recipeGroups: recipes });
+    } catch (error) {
+        console.error('Error fetching recipes:', error);
+        res.status(500).send('Error fetching recipes');
     }
-    catch (err) {
-        res.status(500).send({ message: err.message || "Error Occured" })
-    }
-}
+};
+
 
 exports = module.exports.exploreRandom = async (req, res) => {
     try {
@@ -219,10 +252,10 @@ exports = module.exports.submitRecipePost = async (req, res) => {
         const newRecipe = new Recipe({
             name: req.body.name,
             description: req.body.description,
-            email: req.body.email,
             instructions: req.body.instructions,
             ingredients: req.body.ingredients,
             category: req.body.category,
+            dietType:req.body.dietType,
             image: newImageName,
             user:req.session.userId
         });
@@ -272,47 +305,75 @@ exports = module.exports.signUp = async (req, res) => {
     }
 }
 
-exports = module.exports.signIn = async (req, res) => {
+// exports = module.exports.signIn = async (req, res) => {
 
-    try {
-        const infoErrorsObj = req.flash('infoErrors');
-        const infoSubmitObj = req.flash('infoSubmit');
-        res.render('signin', { title: 'Cooking Blog - Sign In', infoErrorsObj, infoSubmitObj });
-    }
-    catch (err) {
-        res.status(500).send({ message: err.message || "Error Occured" })
-    }
-}
+//     try {
+//         const infoErrorsObj = req.flash('infoErrors');
+//         const infoSubmitObj = req.flash('infoSubmit');
+//         res.render('signin', { title: 'Cooking Blog - Sign In', infoErrorsObj, infoSubmitObj });
+//     }
+//     catch (err) {
+//         res.status(500).send({ message: err.message || "Error Occured" })
+//     }
+// }
 
-exports = module.exports.signinPost = async(req, res) => {
-    try {
+// exports = module.exports.signinPost = async(req, res) => {
+//     try {
 
-       await User.findOne({ email: req.body.email }).exec(async (error, user) => {
-            if (error) req.flash('infoErrors', error);
-            if (user) {
-                const isPassword = await user.authenticate(req.body.password);
-                if (isPassword) {
-                    req.session.userId = user._id
-                    req.session.username = user.name
-                    req.session.userLoggedIn = true
-                    res.redirect('/')
-                }
-                else {
-                    console.log("Email/Password is incorrect")
-                    req.flash('infoErrors', "Email/Password is incorrect")
-                }
-            } else {
+//        await User.findOne({ email: req.body.email }).exec(async (error, user) => {
+//             if (error) req.flash('infoErrors', error);
+//             if (user) {
+//                 const isPassword = await user.authenticate(req.body.password);
+//                 if (isPassword) {
+//                     req.session.userId = user._id
+//                     req.session.username = user.name
+//                     req.session.userLoggedIn = true
+//                     res.redirect('/')
+//                 }
+//                 else {
+//                     // console.log("Email/Password is incorrect")
+//                     req.flash('infoErrors', "Email/Password is incorrect")
+//                 }
+//             } else {
             
-                req.flash('infoErrors', "Not existing user")
-                res.redirect('/signin');
-            }
-        });
+//                 req.flash('infoErrors', "Not existing user")
+//                 res.redirect('/signin');
+//             }
+//         });
+//     }
+//     catch (error) {
+//         req.flash('infoErrors', error);
+//         res.redirect('/signin');
+//     }
+// }
+
+exports = module.exports.signinPost = async (req, res) => {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+  
+      if (!user) {
+        req.flash('infoErrors', 'User does not exist.');
+        return res.redirect('/signin');
+      }
+  
+      const isPassword = await user.authenticate(req.body.password);
+      if (!isPassword) {
+        req.flash('infoErrors', 'Email/Password is incorrect.');
+        return res.redirect('/signin');
+      }
+  
+      // Set session data and redirect to the home page
+      req.session.userId = user._id;
+      req.session.username = user.name;
+      req.session.userLoggedIn = true;
+      return res.redirect('/');
+    } catch (error) {
+      console.error('Error during sign-in:', error);
+      req.flash('infoErrors', 'Something went wrong. Please try again.');
+      return res.redirect('/signin');
     }
-    catch (error) {
-        req.flash('infoErrors', error);
-        res.redirect('/signin');
-    }
-}
+  };
+  
 
 module.exports.allRecipes = async(req,res)=>{
     try {
@@ -385,14 +446,71 @@ exports = module.exports.Profile = async(req,res) =>{
     
 }
 
-exports = module.exports.viewRecipe = async(req,res)=>{
+// exports = module.exports.Profile = async (req, res) => {
+//     try {
+//         let imageUploadFile;
+//         let uploadPath;
+//         let newImageName;
+
+//         if (!req.files || Object.keys(req.files).length === 0) {
+//             console.log('No files were uploaded.');
+//             req.flash('infoErrors', 'No files were uploaded.');
+//             return res.redirect('/profile'); // Redirect the user with an error message
+//         }
+
+//         imageUploadFile = req.files.image;
+
+//         // Sanitize file name (only keep the extension and generate a safe name)
+//         const fileExtension = imageUploadFile.name.split('.').pop();
+//         newImageName = `${Date.now()}.${fileExtension}`;
+
+//         uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
+
+//         // Move the file
+//         await imageUploadFile.mv(uploadPath, function (err) {
+//             if (err) {
+//                 console.error('Error moving file:', err);
+//                 return res.status(500).send('Failed to upload file.');
+//             }
+//         });
+
+//         // Update user profile with new image
+//         await User.updateOne(
+//             { _id: ObjectId(req.session.userId) },
+//             { $set: { image: newImageName } },
+//             { upsert: true }
+//         );
+
+//         res.redirect('/profile'); // Redirect after successful update
+//     } catch (error) {
+//         console.error('Error:', error);
+//         req.flash('infoErrors', 'An error occurred while updating the profile.');
+//         res.redirect('/profile'); // Redirect the user with an error message
+//     }
+// };
+
+
+exports = module.exports.viewRecipe = async (req, res) => {
     try {
-        const recipe_id= req.params.id
-        const recipeItem = await Recipe.find({ _id: recipe_id })
-        res.json({status:true,result:recipeItem})
-    }
-    catch (err) {
-        res.status(500).send({ message: err.message || "Error Occured" })
+        const recipe_id = req.params.id;
+
+        // Fetch the specific recipe
+        const recipe = await Recipe.findById(recipe_id);
+        if (!recipe) return res.status(404).render('error', { message: 'Recipe not found' });
+
+        // Aggregate diet type data
+        const dietDataAggregation = await Recipe.aggregate([
+            { $group: { _id: "$dietType", count: { $sum: 1 } } },
+            { $sort: { _id: 1 } }
+        ]);
+
+        const dietLabels = dietDataAggregation.map(item => item._id);
+        const dietData = dietDataAggregation.map(item => item.count);
+
+        res.render('view-recipe', { recipe, dietLabels, dietData });
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).render('error', { message: err.message });
     }
 }
 

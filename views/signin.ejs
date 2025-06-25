@@ -2,28 +2,39 @@
     <div class="col-lg-12 col-xl-11">
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign In</p>
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
 
+                <!-- Display success message if infoSubmitObj is set -->
+                <% if (infoSubmitObj && infoSubmitObj.length > 0) { %>
+                <div class="col-8 alert alert-success" role="alert">
+                    <%= infoSubmitObj %>
+                </div>
+                <% } %>
 
-                <% if(infoSubmitObj != '') { %>
-                    <div class="col-8 alert alert-success" role="alert">
-                      <%= infoSubmitObj %>
-                    </div>
+                <!-- Display error message if infoErrorsObj is set -->
+                <% if (infoErrorsObj && infoErrorsObj.length > 0) { %>
+                <div class="col-8 alert alert-danger" role="alert">
+                    <%= infoErrorsObj %>
+                </div>
+                <% } %>
+
+                <% if (messages.error) { %>
+                    <div class="alert alert-danger"><%= messages.error %></div>
                   <% } %>
                 
-                  <% if(infoErrorsObj != '') { %>
-                    <div class="col-8 alert alert-danger" role="alert">
-                      <%= infoErrorsObj[0].message %>
-                    </div>
+                  <% if (messages.success) { %>
+                    <div class="alert alert-success"><%= messages.success %></div>
                   <% } %>
-                
-                <form class="mx-1 mx-md-4" method="POST" action="/signin">
+
+
+                <form class="mx-1 mx-md-4" method="POST" action="/signin" onsubmit="return validateLoginForm()">
                     <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="form3Example3c">Your Email</label>
-                            <input type="email" id="form3Example3c" class="form-control" name="email" autocomplete="off"/>
-                           
+                            <input type="email" id="form3Example3c" class="form-control" name="email"
+                                autocomplete="off" />
+                            <span id="emailError" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -31,8 +42,16 @@
                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="form3Example4c">Password</label>
-                            <input type="password" id="form3Example4c" class="form-control" name="password" autocomplete="off"/>
-                           
+                            <input type="password" id="form3Example4c" class="form-control" name="password"
+                                autocomplete="off" />
+                            <span id="passwordError" class="text-danger"></span>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="togglePassword"
+                                    onclick="togglePasswordVisibility()" />
+                                <label class="form-check-label" for="togglePassword">
+                                    Show Password
+                                </label>
+                            </div>
                         </div>
                     </div>
 
@@ -40,19 +59,77 @@
                         <button type="submit" class="btn btn-primary btn-lg">Login</button>
                     </div>
 
-                    <div class="form-check d-flex justify-content-center mb-5">
-                        <label class="form-check-label" for="form2Example3">
-                          Don't have an account? <a href="/signup">Sign Up!</a>
-                        </label>
+                    <div class="form-check d-flex justify-content-center mb-5 gap-2">
+                        <span>Don't have an account?</span>
+                        <a href="/signup" class="styled-link">Sign Up</a>
+                        <span>|</span>
+                        <a href="/forgot-password" class="styled-link">Forgot Password</a>
                     </div>
                 </form>
-
             </div>
             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                    class="img-fluid" alt="Sample image">
             </div>
         </div>
-
-
     </div>
 </div>
+
+<style>
+    .styled-link {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .styled-link:hover {
+        text-decoration: underline;
+        color: #0056b3;
+    }
+
+    .form-check.d-flex.justify-content-center.mb-5 {
+        font-size: 1rem;
+    }
+</style>
+
+<script>
+    // Toggle Password Visibility
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("form3Example4c");
+        const toggleCheckbox = document.getElementById("togglePassword");
+
+        if (toggleCheckbox.checked) {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    }
+
+    // Form Validation
+    function validateLoginForm() {
+        let isValid = true;
+
+        // Clear previous errors
+        document.getElementById('emailError').innerText = '';
+        document.getElementById('passwordError').innerText = '';
+
+        // Email Validation
+        const email = document.getElementById('form3Example3c').value.trim();
+        if (email === '') {
+            document.getElementById('emailError').innerText = 'Email is required.';
+            isValid = false;
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            document.getElementById('emailError').innerText = 'Please enter a valid email.';
+            isValid = false;
+        }
+
+        // Password Validation
+        const password = document.getElementById('form3Example4c').value.trim();
+        if (password === '') {
+            document.getElementById('passwordError').innerText = 'Password is required.';
+            isValid = false;
+        }
+
+        return isValid;
+    }
+</script>

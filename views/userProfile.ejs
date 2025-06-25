@@ -57,7 +57,7 @@
                                             <th scope="col">Recipe</th>
                                             <th scope="col">Item</th>
                                             <th scope="col">Category</th>
-                                            <th scope="col">Actions</th>
+                                            <th scope="col">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -79,7 +79,7 @@
                                                     </td>
 
                                                     <td>
-                                                        <button class="btn btn-warning"
+                                                        <!-- <button class="btn btn-warning"
                                                             onclick="viewList('<%= item._id %>')" data-bs-toggle="modal"
                                                             data-bs-target="#viewModal">
                                                             <i class="bi bi-view-list"></i>
@@ -88,7 +88,7 @@
                                                         <button class="btn btn-success" data-bs-toggle="modal"
                                                             data-bs-target="#editModal">
                                                             <i class="bi bi-pen"></i>
-                                                        </button>
+                                                        </button> -->
 
                                                         <button class="btn btn-danger"
                                                             onclick="removeList('<%= item._id %>')">
@@ -218,16 +218,16 @@
                     <% if(user && user.image ) {%>
                         <img src="/uploads/<%= user.image %>" alt="image" loading="lazy" width="300px" height="300px">
                         <% } else { %>
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" title="avatar" alt="avatar">
+                            <img src="https://img.freepik.com/premium-photo/cartoon-boy-cooking_81048-33999.jpg" title="avatar" alt="avatar">
                             <% } %>
                 </div>
                 <br />
-                <form method="post" action="/profile" enctype="multipart/form-data">
+                <!-- <form method="post" action="/profile" enctype="multipart/form-data">
 
                     <label for="image"></label>
                     <input type="file" name="image" accept="image/*" required>
                     <button type="submit" class="btn btn-primary">Upload</button>
-                </form>
+                </form> -->
 
             </div>
         </div>

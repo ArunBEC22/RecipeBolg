@@ -5,50 +5,295 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= typeof title != 'undefined' ? title:'Cooking Blog' %></title>
-    <!--Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-     <!--Bootstrap Icons -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" integrity="sha384-xeJqLiuOvjUBq3iGOjvSQSIlwrpqjSHXpduPd6rQpuiM3f5/ijby8pCsnbu5S81n" crossorigin="anonymous">
-    <!--Google Font -->
+    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Rubik:wght@300&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <style>
+        .nav-link-custom {
+            text-decoration: none;
+            color: black;
+        }
+
+        /* Custom Dropdown Style */
+        .dropdown-menu {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            min-width: 180px;
+        }
+
+        .dropdown-item {
+            color: #000;
+            padding: 10px 20px;
+        }
+
+        .dropdown-item:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .dropdown-item:focus {
+            background-color: #0a0a0a;
+            color: #fff;
+        }
+    </style> -->
+    <style>
+        /* Updated Navbar Styling */
+        .navbar {
+            width: 100%; /* Occupy full width of the screen */
+            background: linear-gradient(to right, #f8f9fa, #e9ecef); /* Light gradient background */
+            border-bottom: 2px solid #dee2e6;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .navbar-brand {
+            font-family: 'Rubik', sans-serif;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #007bff !important;
+        }
+        
+        .navbar-brand:hover {
+            color: #0056b3 !important;
+            text-decoration: none;
+        }
+        
+        .nav-link {
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            color: #495057 !important;
+            padding: 10px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #007bff !important;
+            background-color: rgba(0, 123, 255, 0.1);
+            border-radius: 5px;
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 8px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        
+        .navbar-toggler:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .navbar-toggler-icon {
+            font-size: 1.5rem;
+            color: #007bff;
+        }
+        
+        .form-control {
+            border-radius: 20px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        
+        .btn-outline-success {
+            border-radius: 20px;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-outline-success:hover {
+            background-color: #218838;
+        }
+        
+        /* Ensure navbar content is centered */
+        .navbar .container-fluid {
+            max-width: 100%;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        /* Footer Styling */
+.custom-footer {
+    background: linear-gradient(to right, #f8f9fa, #e9ecef); /* Light gradient background */
+    border-top: 2px solid #dee2e6;
+    color: #495057;
+    font-family: 'Lato', sans-serif;
+    padding-top: 20px;
+}
+
+.custom-footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.custom-footer a {
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.custom-footer a:hover {
+    transform: translateY(-3px); /* Smooth upward hover effect */
+}
+
+.custom-footer i {
+    font-size: 1.5rem; /* Reduced icon size */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.custom-footer .social-icons a {
+    margin: 0 10px;
+    color: inherit; /* Default color inherits from text classes */
+}
+
+.custom-footer .social-icons a:hover {
+    transform: scale(1.2); /* Slightly enlarges icons on hover */
+    color: #ff5722; /* Adds a distinct highlight color on hover */
+}
+
+/* Upper Links Styling (for navbar and other links) */
+.navbar .nav-link,
+.navbar-brand {
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar-brand:hover {
+    color: #ff5722 !important; /* Highlight color on hover */
+    background-color: rgba(255, 87, 34, 0.1); /* Subtle background shading */
+    border-radius: 5px; /* Rounded edges for the hover effect */
+}
+
+.btn-outline-success:hover {
+    background-color: #ff5722 !important; /* Matches the hover theme */
+    border-color: #ff5722;
+}
+
+.form-control:focus {
+    border-color: #ff5722;
+    box-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
+}
+.logo{
+    height: 60px;
+    width: 60px;
+}
+
+@media (max-width: 576px) {
+    .logo {
+        height: 65px; /* Adjust height for mobile */
+        width: 65px;  /* Adjust width for mobile */
+    }
+}
+
+.navbar-toggler:focus {
+    background-color: #f8f9fa; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+}
+
+
+
+        </style>
+        
+        
 </head>
 <body>
-    <div class="container-xxl px-md-5 bg-white shadow-lg">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center col-md-3 mb-md-0 text-dark text-decoration-none">
-            <img src="https://cdn.dribbble.com/users/3055978/screenshots/11864513/1_4x.jpg" alt="Cooking Blog" width="229" height="68" >
-            </a>
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <div class="col-md-3 text-end">
-                    <form action="/search" method="POST">
-                        <input type="text" placeholder="Search..." name="searchTerm" class="form-control" aria-label="Search">
-                    </form>
-                </div>
-                <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
-                <li><a href="/allrecipes" class="nav-link px-2 link-secondary">Recipes</a></li>
-                <li><a href="/submit-recipe" class="nav-link px-2 link-secondary">Submit</a></li>
-                <% if(userName){ %>
-                    <li><a href="/profile" class="nav-link px-2 link-secondary">Welcome <%= userName %>!</a></li>
-                    <li><a href="/logout" class="nav-link px-2 link-secondary">Logout</a></li>
-                <% } else{ %>
-                    <li><a href="/signin" class="nav-link px-2 link-secondary">Login</a></li>
-                <% } %>
-            </ul>
-        </header>
+    
+
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="height: 80px">
+        <div class="container-fluid">
+            <a class="navbar-brand"  href="/"><img src="https://png.pngtree.com/png-clipart/20240202/original/pngtree-chef-logo-for-culinary-png-image_14215663.png" alt="logo" class="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="flase" aria-label="Toggle navigation">
+                <i class="fa fa-bars" style="font-size: 1.5rem; color: #000;"></i> <!-- Updated Icon -->
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><b>Home</b></a>
+                    </li>&nbsp;&nbsp;
+                    <li class="nav-item">
+                        <a class="nav-link" href="/allrecipes"><b>Explore Recipes</b></a>
+                    </li>&nbsp;&nbsp;
+                    <li class="nav-item">
+                        <a class="nav-link" href="/submit-recipe"><b>Add Recipes</b></a>
+                    </li>&nbsp;&nbsp;
+                    <% if(userName) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile"><b>Welcome  <%= userName %>!</b></a>
+                    </li>&nbsp;&nbsp;
+                    <li class="nav-item">
+                        <a class="nav-link" href="/forgot-password"><b>Change Password</b></a>
+                    </li>&nbsp;&nbsp;
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"><b>Logout</b></a>
+                    </li>&nbsp;&nbsp;
+                    <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signin"><b>Login</b></a>
+                    </li>
+                    <% } %>
+                </ul>
+                <form class="d-flex" action="/search" method="POST" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search..." name="searchTerm" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+    
+    <div class="container-xxl px-md-5 shadow-lg">
+        
+        
         <main>
             <%- body -%>
         </main>
-        <br/> <br/> <br/>
-        <footer class="py-1" style="bottom:0; text-align: center; border-top: 1px solid #dad3d3;">
-            <p>Build ©2022</p>
-        </footer>
+        
+        <br/><br/><br/>
     </div>
+        <footer class="py-4 custom-footer">
+            <div class="container text-center">
+                <p class="mb-2">Slice and Spice for your flavorful journey.</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com" target="_blank" class="text-primary">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.twitter.com" target="_blank" class="text-info">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" class="text-danger">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com" target="_blank" class="text-primary">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.youtube.com" target="_blank" class="text-danger">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <p class="mt-2 mb-0">© 2024 Spice and Slice. All rights reserved.</p>
+            </div>
+        </footer>
     
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="/js/script.js"></script>
 </body>
-</html>
+</html

@@ -1,4 +1,58 @@
 
+
+/* Sticky Footer Layout */
+html, body {
+  height: 100%; /* Ensure the body takes the full viewport height */
+  margin: 0; /* Remove default margins */
+  display: flex;
+  flex-direction: column;
+}
+
+.container-xxl {
+  flex: 1; /* Ensures the main content stretches to fill available space */
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* Allows the main content to stretch and push the footer to the bottom */
+}
+
+.custom-footer {
+  background: linear-gradient(to right, #f8f9fa, #e9ecef); /* Light gradient background */
+  border-top: 2px solid #dee2e6;
+  color: #495057;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.custom-footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.custom-footer .social-icons a {
+  margin: 0 10px;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.custom-footer .social-icons a:hover {
+  color: #ff5722; /* Highlight color on hover */
+  transform: scale(1.2); /* Slight scaling effect */
+}
+
+
+.ex{
+  margin-left: 200px ;
+}
+
+
 :root{
     --bs-font-sans-serif:'Rubik', sans-serif;
 }
@@ -6,10 +60,10 @@
 .container-xxl{
     max-width: 1530px;
 }
-body{
+/* body{
     background-image: url('https://st.depositphotos.com/3470617/4866/v/600/depositphotos_48661031-stock-illustration-breakfast-background.jpg');
     background-color: rgb(243,243,243);
-}
+} */
 
 a{
     color: var(--bs-dark);

@@ -27,11 +27,11 @@ recipeRouter.get('/explore-random',recipeController.exploreRandom)
 recipeRouter.get('/submit-recipe',verifyLogin,recipeController.submitRecipe)
 recipeRouter.post('/submit-recipe',verifyLogin,recipeController.submitRecipePost)
 
-recipeRouter.post('/signup',recipeController.signupPost)
+// recipeRouter.post('/signup',recipeController.signupPost)
 recipeRouter.get('/signup',recipeController.signUp)
 
-recipeRouter.get('/signin',recipeController.signIn)
-recipeRouter.post('/signin',recipeController.signinPost)
+// recipeRouter.get('/signin',recipeController.signIn)
+// recipeRouter.post('/signin',recipeController.signinPost)
 
 recipeRouter.get('/allrecipes',recipeController.allRecipes)
 
@@ -40,8 +40,8 @@ recipeRouter.post('/profile',verifyLogin,recipeController.Profile)
 
 recipeRouter.get('/viewList/:id',verifyLogin,recipeController.viewRecipe)
 
-recipeRouter.get('/editList/:id',verifyLogin,(req,res)=>res.redirect('/profile'))
-recipeRouter.post('/editList/:id',verifyLogin,recipeController.editRecipes)
+// recipeRouter.get('/editList/:id',verifyLogin,(req,res)=>res.redirect('/profile'))
+// recipeRouter.post('/editList/:id',verifyLogin,recipeController.editRecipes)
 
 
 recipeRouter.delete('/deleteList/:id',verifyLogin,recipeController.deleteRecipe)
@@ -49,7 +49,7 @@ recipeRouter.delete('/deleteList/:id',verifyLogin,recipeController.deleteRecipe)
 //log out
 recipeRouter.get('/logout',(req,res)=> {
   req.session.destroy();
-  res.redirect('/');
+  res.redirect('/signin');
 })
 
 
